@@ -1,3 +1,5 @@
+import { Open_Sans } from 'next/font/google';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -7,9 +9,16 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        opensans: ['var(--font-opensans)'],
+        cib: ['var(--font-cib)']
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+      },
+      maxWidth: {
+        '8xl': '1410px'
       },
     },
   },
