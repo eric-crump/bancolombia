@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono, Open_Sans } from "next/font/google";
 import localFont from 'next/font/local';
 import "./globals.css";
+import PersonalizationProvider from "./personalize";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,7 +40,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${openSans.variable} ${cib.variable} antialiased`}
       >
-        {children}
+        <PersonalizationProvider>{children}</PersonalizationProvider>
       </body>
     </html>
   );
