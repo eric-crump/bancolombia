@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { cslp } from "@/lib/cstack";
 
-export default function FormBuilder({ content }) {
-  console.log(content);
+export default function FormBuilder({ content, nextEvent }) {
+  console.log("form builder", content);
 
   async function sendForm(e) {
     e.preventDefault();
@@ -24,9 +24,8 @@ export default function FormBuilder({ content }) {
     <div className="py-8 w-full h-4/6  flex justify-center items-center">
       {content && (
         <div className="flex flex-col justify-center ">
-          <div className="flex flex-col items-center my-4 p-4">
-            <h3 {...content?.$?.title}>{content?.title}</h3>
-            <div {...content?.$?.description}>{content?.description}</div>
+          <div className="flex flex-col  my-4 ">
+            <p className="font-bold text-lg" {...content?.$?.description}>{content?.instructions}</p>
           </div>
 
           <form onSubmit={sendForm}>
@@ -165,12 +164,16 @@ export default function FormBuilder({ content }) {
               );
             })}
             <div className="w-[600px] items-start self-center">
+              {content?.button_text &&
               <button
+                type="button"
+                onClick={() => nextEvent()}
                 className="border border-2-white py-2 mt-6 bg-white hover:bg-transparent w-1/4"
                 {...content?.$?.button_text}
               >
                 {content?.button_text}
               </button>
+              }
             </div>
           </form>
         </div>

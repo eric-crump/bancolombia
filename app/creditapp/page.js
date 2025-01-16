@@ -6,6 +6,7 @@ import Header from "@/components/header";
 
 export default function Page(){
     const [entry, setEntry] = useState({});
+    const [wizardIndex, setWizardIndex] = useState(0);
 
     const getContent = async () => {
         const entry = await Stack.getElementByType("credit_app", "es-co");
@@ -16,6 +17,10 @@ export default function Page(){
     useEffect(() => {
         onEntryChange(getContent);
     }, []);
+
+    const wizardButtonClicked = () => {
+        setWizardIndex(wizardIndex + 1);
+    }
 
     return(
         <div className="">
@@ -32,14 +37,17 @@ export default function Page(){
                     >
 
                     </div>
-                    {/* <p className="text-[30px] text-[#0F275C] font-cib">El camino a tu sueño comienza aquí</p>
-                    <p className="font-semibold mt-5 text-[#45474A]">Descubre el monto al que podrías acceder en menos de 5 minutos</p>
-                    <p className="text-[#45474A] mt-5 font-medium">Te pediremos los siguientes datos:</p> */}
                 </div>
 
                 <div className="w-full">
                     <div className="w-[600px] mx-auto pt-24">
-                        <FormBuilder content={entry?.form_builder}/>
+                        {entry?.wizard?.map((page, index) => (
+                            <div key={index}>
+                                {index === wizardIndex &&
+                                    <FormBuilder key={index} content={page.page} nextEvent={wizardButtonClicked}/>
+                                }
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
