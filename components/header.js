@@ -30,7 +30,7 @@ export default function Header() {
 
     return (
         <div className="font-opensans">
-            <div className="bg-[#2C292A] text-white px-5 ">
+            <div className="hidden lg:block bg-[#2C292A] text-white px-5 ">
                 <div className="max-w-8xl mx-auto w-full flex justify-between">
                     <div className="flex h-full text-[14px] font-semibold items-center gap-1">
                         {entry?.top_nav_items?.map((item, index) => (
@@ -77,11 +77,11 @@ export default function Header() {
             <div className="max-w-7xl mx-auto px-5 py-3 flex justify-between items-center">
                 <img src={entry?.logo?.url} />
 
-                <div className="flex gap-10 items-center">
+                <div className="hidden lg:flex gap-10 items-center">
                     {entry?.menu_items?.map((item, index) => (
                         <div key={index}>
                             {item.mega_menu_items.length === 0 &&
-                                <a href={item?.page?.length > 0 ? item.page[0].url : "#"} className="text-xs">Inicio</a>
+                                <a href={item?.page?.length > 0 ? item.page[0].url : "#"} className="text-xs">{item.text}</a>
                             }
                             {item.mega_menu_items.length > 0 &&
                                 <Popover className="flex items-center">
@@ -106,14 +106,16 @@ export default function Header() {
                     ))}
                 </div>
 
-                <div className="flex items-center">
-                    <a href="#" className="bg-[#2C292A] h-min rounded-full text-white py-2 px-3 text-[13px] font-semibold block">Trámites digitales</a>
+                <div className="hidden lg:flex items-center">
+                    <a href="#" className="bg-[#2C292A] h-min rounded-full text-white py-2 px-3 text-[13px] font-semibold block text-nowrap">Trámites digitales</a>
                     <div className="shadow-md flex items-center ml-5 py-1 px-4">
                         <p className="text-[12px]">Sucursal Virtual Personas</p>
                         <ChevronDownIcon className="size-4 ml-1" />
                         <a href="#" className="rounded-full bg-[#FDDA24] ml-4 px-4 py-2 text-[12px] hover:shadow-lg">Entrar</a>
                     </div>
                 </div>
+
+                <a href="#" className="font-cib lg:hidden">Menú</a>
             </div>
         </div >
     )

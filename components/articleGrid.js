@@ -7,7 +7,7 @@ export default function ArticleGrid({ content, taxonomies }) {
     const [articles, setArticles] = useState([]);
 
     const getContent = async () => {
-        const tax = taxonomies.map(t => t.term_uid)
+        const tax = taxonomies.map(t => t.term_uid);
         const entry = await Stack.getElementByTypeByTaxonomy("article", "es-co", tax);
         //console.log("articles", entry[0]);
         setArticles(entry[0]);
@@ -17,11 +17,15 @@ export default function ArticleGrid({ content, taxonomies }) {
         onEntryChange(getContent);
     }, []);
 
+    useEffect(() => {
+        getContent();
+    }, [taxonomies])
+
     return (
         <div className="bg-[#F7F7F7] w-full mt-8 pb-24">
-            <div className="max-w-7xl grid grid-cols-3 mx-auto gap-8">
+            <div className="max-w-[450px] lg:max-w-4xl xl:max-w-7xl grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 mx-auto gap-8">
                 {articles.slice(0, content?.max_items).map((item, index) => (
-                    <div key={index} className="h-[354px] bg-white shadow text-center">
+                    <div key={index} className="h-[354px] max-w-[450px] bg-white shadow text-center">
                         <img src={item.image?.url} />
                         <div className="pb-4 px-2">
                             <div className="pt-4 px-4 h-[180px] flex flex-col justify-between">

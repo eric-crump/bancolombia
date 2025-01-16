@@ -10,6 +10,7 @@ import TextAndImage from "@/components/textAndImage";
 export default function Home() {
   const [entry, setEntry] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [categories, setCategories] = useState([])
 
   const getContent = async () => {
     const entry = await Stack.getElementByTypeWtihRefs("homepage", "es-co", [
@@ -17,6 +18,7 @@ export default function Home() {
     ]);
     console.log("homepage", entry[0][0]);
     setEntry(entry[0][0]);
+    setCategories(entry[0][0].taxonomies);
     setIsLoading(false);
   };
 
@@ -40,7 +42,7 @@ export default function Home() {
             <Tabs content={block.tabs} />
           }
           {block.hasOwnProperty('article_cards') &&
-            <ArticleGrid content={block.article_cards} taxonomies={entry?.taxonomies} />
+            <ArticleGrid content={block.article_cards} taxonomies={categories} />
           }
         </div>
       ))}
